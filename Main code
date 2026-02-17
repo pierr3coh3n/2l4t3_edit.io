@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2l4t3 - Monteur Vidéo Amateur | Paris</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root{
+      --bg:#0a0a0f;
+      --glass: rgba(20,20,45,0.72);
+      --glass2: rgba(30,30,70,0.80);
+      --border: rgba(0,212,255,0.28);
+      --cyan:#00d4ff;
+      --blue:#0099cc;
+      --muted:#a0bfff;
+      --muted2:#b8d0ff;
+      --white:#ffffff;
+      --shadow: 0 30px 90px rgba(0,0,0,0.55);
+    }
+
+    body{
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: var(--white);
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav{
+      position: fixed;
+      top:0; left:0; right:0;
+      background: rgba(10,10,15,0.96);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      z-index: 1000;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(0,212,255,0.18);
+    }
+    .nav-wrap{
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 28px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 180px;
+    }
+    .brand-pfp{
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background:
+        linear-gradient(rgba(0,0,0,0.18), rgba(0,0,0,0.18)),
+        url("https://i.redd.it/the-way-people-were-too-embarrassed-to-simp-over-muzans-v0-bejhj11okc8b1.jpg?width=2048&format=pjpg&auto=webp&s=99b504c913571bc6087f56dec7dfca25786cdcad")
+        center/cover no-repeat;
+      border: 2px solid var(--cyan);
+      box-shadow: 0 0 18px rgba(0,212,255,0.45);
+      flex: 0 0 auto;
+    }
+    .brand-name{
+      font-weight: 900;
+      font-size: 1.3rem;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links{
+      list-style:none;
+      display:flex;
+      gap: 34px;
+      flex-wrap: wrap;
+      justify-content:center;
+    }
+    .nav-links a{
+      color: var(--muted);
+      text-decoration:none;
+      font-weight:600;
+      font-size: 1.02rem;
+      position: relative;
+      transition: color .2s ease;
+    }
+    .nav-links a:hover{ color: var(--cyan); }
+    .nav-links a::after{
+      content:"";
+      position:absolute;
+      left:0; bottom:-6px;
+      height:2px; width:0;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      transition: width .22s ease;
+      border-radius: 99px;
+    }
+    .nav-links a:hover::after{ width:100%; }
+
+    /* HERO */
+    .hero{
+      min-height: 100vh;
+      padding: 110px 24px 70px;
+      display:flex;
+      flex-direction: column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      background:
+        linear-gradient(rgba(0,0,15,0.86), rgba(10,10,40,0.94)),
+        url("https://www.hifrance.org/wp-content/uploads/2022/07/Paris-blog.png") center/cover no-repeat fixed;
+    }
+    .hero-pfp{
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      background:
+        linear-gradient(rgba(0,0,0,0.18), rgba(0,0,0,0.18)),
+        url("https://i.redd.it/the-way-people-were-too-embarrassed-to-simp-over-muzans-v0-bejhj11okc8b1.jpg?width=2048&format=pjpg&auto=webp&s=99b504c913571bc6087f56dec7dfca25786cdcad")
+        center/cover no-repeat;
+      border: 4px solid var(--cyan);
+      box-shadow:
+        0 0 60px rgba(0,212,255,0.55),
+        0 0 110px rgba(0,212,255,0.18);
+      margin-bottom: 26px;
+      animation: float 6.5s ease-in-out infinite;
+      position: relative;
+    }
+    .hero-pfp::before{
+      content:"";
+      position:absolute;
+      inset:-14px;
+      border-radius:50%;
+      background: conic-gradient(from 0deg, var(--cyan), rgba(0,212,255,0.2), var(--blue), rgba(0,153,204,0.15), var(--cyan));
+      filter: blur(18px);
+      opacity: 0.55;
+      z-index: -1;
+      animation: spin 9s linear infinite;
+    }
+    @keyframes float{ 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-18px);} }
+    @keyframes spin{ to { transform: rotate(360deg);} }
+
+    .hero h1{
+      font-size: clamp(4.6rem, 10vw, 8.2rem);
+      font-weight: 900;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, var(--cyan), var(--blue), var(--cyan));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color: transparent;
+      background-clip:text;
+      text-shadow: 0 0 22px rgba(0,212,255,0.15);
+      margin-bottom: 14px;
+    }
+    .subtitle{
+      font-size: clamp(1.2rem, 3.2vw, 2.2rem);
+      color: var(--muted);
+      max-width: 920px;
+      font-weight: 300;
+      margin-bottom: 28px;
+    }
+    .cta{
+      display:inline-block;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: #071018;
+      padding: 16px 38px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      box-shadow: 0 18px 44px rgba(0,212,255,0.40);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .cta:hover{
+      transform: translateY(-6px);
+      box-shadow: 0 30px 70px rgba(0,212,255,0.55);
+    }
+
+    /* SECTIONS */
+    section{
+      padding: 110px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .section-title{
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      text-align:center;
+      margin-bottom: 56px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color: transparent;
+      background-clip:text;
+    }
+
+    /* ABOUT */
+    .about{
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 44px;
+      padding: 78px;
+      display:grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 64px;
+      align-items:center;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+    .about-card{
+      border-radius: 28px;
+      overflow:hidden;
+      border: 1px solid rgba(0,212,255,0.22);
+      background:
+        linear-gradient(rgba(0,0,0,0.70), rgba(0,0,0,0.70)),
+        url("https://preview.redd.it/how-would-you-make-muzan-a-better-antagonist-v0-h4zgmvkf8rsf1.jpeg?width=640&crop=smart&auto=webp&s=b883fcf5941612d63b2b85d987297748fae02ddc")
+        center/cover no-repeat;
+      height: 420px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+      transform: translateZ(0);
+      transition: transform .25s ease;
+    }
+    .about:hover .about-card{ transform: scale(1.02); }
+    .about h3{
+      color: var(--cyan);
+      font-size: 2.2rem;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+    .about p{
+      color: var(--muted2);
+      font-size: 1.18rem;
+      margin-bottom: 14px;
+      line-height: 1.7;
+    }
+
+    /* DAVINCI */
+    .davinci{
+      border-radius: 44px;
+      padding: 92px 78px;
+      background:
+        linear-gradient(rgba(0,0,25,0.92), rgba(15,15,50,0.92)),
+        url("https://imgs.search.brave.com/rutjJwiSr-tDu8CkucGwrRdg5qr1ibH1qcxeoiM4wUw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFnZXMuYmxhY2ttYWdpY2Rlc2lnbi5jb20vaW1hZ2VzL3Byb2R1Y3RzL2RhdmluY2lyZXNvbHZlL292ZXJ2aWV3L29uZXNvbHV0aW9uL2Nhcm91c2VsL2NvbG9yLmpwZz9fdz0xNzQzNjU4MTgz")
+        center/cover no-repeat fixed;
+      border: 1px solid rgba(0,212,255,0.36);
+      text-align:center;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    .davinci h3{
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+    .davinci p{
+      max-width: 980px;
+      margin: 0 auto 14px;
+      color: #c0d8ff;
+      font-size: 1.25rem;
+      line-height: 1.7;
+    }
+
+    /* PRICING */
+    .prices-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 26px;
+      margin-top: 50px;
+    }
+    .price{
+      background: rgba(25,25,60,0.88);
+      border: 1px solid rgba(0,212,255,0.28);
+      border-radius: 28px;
+      padding: 44px 32px;
+      text-align:center;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.45);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      position: relative;
+      overflow:hidden;
+      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+    .price::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(90deg, transparent, rgba(0,212,255,0.13), transparent);
+      transform: translateX(-120%);
+      transition: transform .55s ease;
+    }
+    .price:hover::before{ transform: translateX(120%); }
+    .price:hover{
+      transform: translateY(-14px);
+      border-color: rgba(0,212,255,0.62);
+      box-shadow: 0 40px 110px rgba(0,212,255,0.16);
+    }
+    .price h3{ color: var(--cyan); font-size: 1.6rem; font-weight: 900; margin-bottom: 10px; }
+    .amount{
+      font-size: 4.1rem;
+      font-weight: 900;
+      color: var(--cyan);
+      text-shadow: 0 0 22px rgba(0,212,255,0.45);
+      margin: 10px 0 14px;
+    }
+    .price p{ color: var(--muted); font-size: 1.1rem; line-height: 1.6; }
+
+    /* PORTFOLIO */
+    .portfolio{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+      gap: 26px;
+      margin-top: 50px;
+    }
+    .video{
+      background: rgba(30,30,70,0.95);
+      border: 2px solid rgba(0,212,255,0.35);
+      border-radius: 28px;
+      overflow:hidden;
+      box-shadow: 0 26px 80px rgba(0,0,0,0.55);
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+      aspect-ratio: 16 / 9;
+    }
+    .video:hover{
+      transform: translateY(-10px);
+      border-color: rgba(0,212,255,0.75);
+      box-shadow: 0 44px 120px rgba(0,212,255,0.18);
+    }
+    .video iframe{
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display:block;
+    }
+
+    /* CONTACT */
+    .contact-card{
+      background: var(--glass2);
+      border: 1px solid rgba(0,212,255,0.30);
+      border-radius: 34px;
+      padding: 54px 42px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      max-width: 980px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .contact-intro{
+      color: var(--muted2);
+      font-size: 1.2rem;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .contact-methods{
+      display:flex;
+      gap: 20px;
+      justify-content:center;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .contact-item{
+      display:flex;
+      align-items:center;
+      gap: 14px;
+      padding: 16px 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,212,255,0.30);
+      background: rgba(10,10,18,0.40);
+      text-decoration: none;
+      color: var(--white);
+      transition: all .25s ease;
+      min-width: 300px;
+      justify-content:center;
+    }
+    .contact-item:hover{
+      transform: translateY(-5px);
+      border-color: rgba(0,212,255,0.80);
+      box-shadow: 0 12px 40px rgba(0,212,255,0.25);
+    }
+    .contact-icon{
+      width: 32px;
+      height: 32px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(0,212,255,0.15);
+      border-radius: 50%;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--cyan);
+    }
+    .contact-label{
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .contact-value{
+      font-weight: 900;
+      color: var(--white);
+      font-size: 1.05rem;
+    }
+    .contact-note{
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.98rem;
+      font-style: italic;
+    }
+
+    footer{
+      padding: 50px 5% 60px;
+      text-align:center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .about{
+        grid-template-columns: 1fr;
+        padding: 58px 34px;
+        gap: 34px;
+        text-align:center;
+      }
+      .portfolio{ grid-template-columns: 1fr; }
+      .nav-wrap{ flex-direction: column; }
+      .nav-links{ gap: 18px; }
+      .davinci{ padding: 64px 28px; }
+    }
+    @media (max-width: 520px){
+      .contact-item{ min-width: 100%; }
+      section{ padding: 92px 5%; }
+    }
+  </style>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2l4t3 - Monteur Vidéo Amateur | Paris</title>
+</head>
+
+<body>
+  <nav>
+    <div class="nav-wrap">
+      <div class="brand">
+        <div class="brand-pfp" aria-label="Photo de profil"></div>
+        <div class="brand-name">2l4t3</div>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#about">Présentation</a></li>
+        <li><a href="#davinci">Outils</a></li>
+        <li><a href="#prices">Tarifs</a></li>
+        <li><a href="#portfolio">Réalisations</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-pfp" aria-label="Photo de profil"></div>
+    <h1>2l4t3</h1>
+    <p class="subtitle">Monteur vidéo amateur • Paris • Spécialisé DaVinci Resolve • 6 ans d'expérience</p>
+    <a class="cta" href="#portfolio">Découvrir mes réalisations</a>
+  </header>
+
+  <section id="about">
+    <h2 class="section-title">Présentation</h2>
+    <div class="about">
+      <div class="about-card" aria-label="Illustration profil"></div>
+      <div>
+        <h3>Expertise en montage vidéo</h3>
+        <p>Fort de 6 années d'expérience sur DaVinci Resolve, je propose des prestations de montage vidéo adaptées aux créateurs de contenu et associations.</p>
+        <p>Ma spécialité : formats courts optimisés pour les réseaux sociaux (Shorts, TikTok, Reels) et vidéos longues structurées pour YouTube. Chaque projet est traité avec rigueur, de l'étalonnage colorimétrique à la synchronisation audio.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="davinci">
+    <h2 class="section-title">DaVinci Resolve</h2>
+    <div class="davinci">
+      <h3>DaVinci Resolve Studio</h3>
+      <p>DaVinci Resolve combine montage, correction colorimétrique, effets visuels (Fusion) et post-production audio (Fairlight).</p>
+      <p>Cette maîtrise technique me permet de livrer des rendus optimisés en 4K, avec un traitement colorimétrique professionnel et une qualité d'exportation adaptée à chaque plateforme.</p>
+    </div>
+  </section>
+
+  <section id="prices">
+    <h2 class="section-title">Tarification</h2>
+    <div class="prices-grid">
+      <div class="price">
+        <h3>Formats courts</h3>
+        <div class="amount">25€</div>
+        <p>Shorts / TikTok / Reels (max. 1 min) • Montage dynamique • Sous-titrage • Musique • Export optimisé plateforme</p>
+      </div>
+
+      <div class="price">
+        <h3>Vidéos YouTube</h3>
+        <div class="amount">60€</div>
+        <p>Format long 10–20 min • Structure narrative • Transitions fluides • Étalonnage colorimétrique • Habillage graphique</p>
+      </div>
+
+      <div class="price">
+        <h3>Forfait mensuel</h3>
+        <div class="amount">200€</div>
+        <p>10 formats courts OU 3 vidéos longues par mois • Suivi prioritaire • Révisions incluses • Délais garantis</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <h2 class="section-title">Réalisations</h2>
+
+    <div class="portfolio">
+
+      <!-- VIDEO 1 -->
+      <div class="video">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/276zcy8rgBY"
+          title="Projet vidéo - Exemple 1"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <!-- VIDEO 2 -->
+      <div class="video">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/IgPa5xwUM_U"
+          title="Projet vidéo - Exemple 2"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="section-title">Me contacter</h2>
+
+    <div class="contact-card">
+      <p class="contact-intro">
+        Pour toute demande de devis, question sur les délais ou discussion de projet, n'hésitez pas à me contacter.
+      </p>
+
+      <div class="contact-methods">
+        <a class="contact-item" href="mailto:pierrecohen2507@gmail.com">
+          <div class="contact-icon">@</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">pierrecohen2507@gmail.com</div>
+          </div>
+        </a>
+
+        <div class="contact-item" style="cursor: default;">
+          <div class="contact-icon">D</div>
+          <div>
+            <div class="contact-label">Discord</div>
+            <div class="contact-value">2l4t3</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="contact-note">
+        Réponse garantie sous 24h • Devis gratuit
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div>© 2026 2l4t3 • Monteur vidéo • Paris</div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('href');
+        if (!id || id === '#') return;
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+
+</body>
+</html>
